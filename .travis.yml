@@ -1,14 +1,22 @@
 sudo: required
 services:
-  - docker
-
+- docker
+addons:
+  ssh_known_hosts: administrateur@devincidocker01003.northeurope.cloudapp.azure.com
 before_install:
-  - docker-compose up -d --build
-
+- docker-compose up -d --build
 script:
-  - docker-compose exec flaskapp python test_basics.py
-
+- docker-compose exec flaskapp python test_basics.py
 after_script:
-  - docker-compose down
-# after_success:
-# - ###
+- docker-compose down
+before_deploy:
+- openssl aes-256-cbc -K $encrypted_23d55bd6a4d7_key -iv $encrypted_23d55bd6a4d7_iv -in azure.rsa.enc -out /tmp/azure.rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/azure.rsa
+- ssh-add /tmp/azure.rsa
+deploy: 
+- provider: script
+  skip_cleanup: true
+  script: bash scripts/deploy.sh
+  on:
+    branch: master

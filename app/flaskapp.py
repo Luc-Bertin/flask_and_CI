@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return "<h1>Hello World</h1>"
+    return "<h1>Hey World</h1>"
 
 @app.route("/visit")
 def hello():
@@ -25,13 +25,3 @@ def hello():
 
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=80)
-
-
-
-
-
-
-
-
-# docker run --name myredisdb -d redis
-# docker run --name flaskapap -P --link myredisdb:redis-server 8eb22f5deaf8
