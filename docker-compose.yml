@@ -13,10 +13,10 @@ services:
     depends_on:
       - "redis-server"
     restart: "on-failure"
-  testing:
-    build:
-      context: "./app"
-      dockerfile: "Dockerfile.dev"
-    command: ["python", "test_basics.py"]
-    depends_on:
-      - "redis-server"
+    #  testing:
+    #    build:
+    #      context: "./app"
+    #      dockerfile: "Dockerfile.dev"
+    #    command: ["python", "test_basics.py"]
+    #    depends_on:
+    #      - "redis-server"
