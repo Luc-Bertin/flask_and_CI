@@ -14,8 +14,6 @@ class CounterTest(unittest.TestCase):
     def tearDown(self):
         pass
     
-
-
     # actual tests #
     def test_welcome_page(self):
         response = self.app.get('/')
