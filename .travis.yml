@@ -4,11 +4,11 @@ services:
 addons:
   ssh_known_hosts: administrateur@devincidocker01003.northeurope.cloudapp.azure.com
 before_install:
-- docker-compose up -d --build
+- docker-compose up -d --build --force-recreate --renew-anon-volumes
 script:
 - docker-compose exec flaskapp python test_basics.py
 after_script:
-- docker-compose down
+- docker-compose down --volumes
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_23d55bd6a4d7_key -iv $encrypted_23d55bd6a4d7_iv -in azure.rsa.enc -out /tmp/azure.rsa -d
 - eval "$(ssh-agent -s)"
